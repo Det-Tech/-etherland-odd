@@ -17,21 +17,23 @@ export type Endpoints = {
   userDomain: string
 }
 
-
 export const PRODUCTION: Endpoints = {
-  apiPath: "/v2/api",
-  lobby: "https://auth.fission.codes",
-  server: "https://runfission.com",
-  userDomain: "fission.name"
+  apiPath: "/v0/api",
+  lobby: "https://auth.etherland.world",
+  server: "https://auth.etherland.world",
+  userDomain: "etherland.me"
 }
 
+// _did.server.etherland.me
 
 export const STAGING: Endpoints = {
-  apiPath: "/v2/api",
-  lobby: "https://auth.runfission.net",
-  server: "https://runfission.net",
-  userDomain: "fissionuser.net"
+  apiPath: "/v0/api",
+  lobby: "https://auth.etherland.world",
+  server: "https://auth.etherland.world",
+  userDomain: "etherland.me"
 }
+
+
 
 
 export function apiUrl(endpoints: Endpoints, suffix?: string): string {

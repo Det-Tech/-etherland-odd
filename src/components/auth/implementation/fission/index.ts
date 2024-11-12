@@ -30,8 +30,8 @@ export async function createAccount(
     issuer: await DID.ucan(dependencies.crypto),
   }))
 
-  const response = await fetch(Fission.apiUrl(endpoints, "/user"), {
-    method: "PUT",
+  const response = await fetch(Fission.apiUrl(endpoints, "/account"), {
+    method: "POST",
     headers: {
       "authorization": `Bearer ${jwt}`,
       "content-type": "application/json"
