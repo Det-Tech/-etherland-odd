@@ -66,7 +66,10 @@ const didCache: {
 export async function did(endpoints: Endpoints): Promise<string> {
   let host
   try {
+    console.log("did ", endpoints)
     host = new URL(endpoints.did).host
+    console.log("host ", host);
+    
   } catch (e) {
     throw new Error("Unable to parse API Endpoint")
   }
