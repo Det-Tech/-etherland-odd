@@ -14,22 +14,25 @@ export type Endpoints = {
   apiPath: string
   lobby: string
   server: string
+  did: string
   userDomain: string
 }
 
 export const PRODUCTION: Endpoints = {
-  apiPath: "/v0/api",
+  apiPath: "/api/v0",
   lobby: "https://auth.etherland.world",
   server: "https://auth.etherland.world",
+  did: "https://server.etherland.me",
   userDomain: "etherland.me"
 }
 
 // _did.server.etherland.me
 
 export const STAGING: Endpoints = {
-  apiPath: "/v0/api",
+  apiPath: "/api/v0",
   lobby: "https://auth.etherland.world",
   server: "https://auth.etherland.world",
+  did: "https://server.etherland.me",
   userDomain: "etherland.me"
 }
 
@@ -63,7 +66,7 @@ const didCache: {
 export async function did(endpoints: Endpoints): Promise<string> {
   let host
   try {
-    host = new URL(endpoints.server).host
+    host = new URL(endpoints.did).host
   } catch (e) {
     throw new Error("Unable to parse API Endpoint")
   }
