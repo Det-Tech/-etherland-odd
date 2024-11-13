@@ -36,17 +36,11 @@ export const STAGING: Endpoints = {
   userDomain: "etherland.me"
 }
 
-
-
-
 export function apiUrl(endpoints: Endpoints, suffix?: string): string {
   return `${endpoints.server}${endpoints.apiPath}${suffix?.length ? "/" + suffix.replace(/^\/+/, "") : ""}`
 }
 
-
-
 // API
-
 
 const didCache: {
   did: string | null
@@ -66,10 +60,7 @@ const didCache: {
 export async function did(endpoints: Endpoints): Promise<string> {
   let host
   try {
-    console.log("did ", endpoints)
     host = new URL(endpoints.did).host
-    console.log("host ", host);
-    
   } catch (e) {
     throw new Error("Unable to parse API Endpoint")
   }
