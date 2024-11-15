@@ -20,7 +20,8 @@ export type Implementation<C> = {
   // Account creation
   isUsernameAvailable: (username: string) => Promise<boolean>
   isUsernameValid: (username: string) => Promise<boolean>
-  register: (options: { username: string; email?: string }) => Promise<{ success: boolean }>
+  register: (options: { username: string; email: string; code: string; hashedUsername: string }) => Promise<{ success: boolean }>
+  // emailVerify: (options: { email: string, }) => Promise<{success: boolean}>
 
   // Account delegation
   canDelegateAccount: (username: string) => Promise<boolean>

@@ -141,6 +141,9 @@ export async function recoverFileSystem({
   // Register a new user with the `newUsername`
   const { success } = await auth.register({
     username: newUsername,
+    email: newUsername,
+    code: newUsername, 
+    hashedUsername: newUsername
   })
   if (!success) {
     throw new Error("Failed to register new user")

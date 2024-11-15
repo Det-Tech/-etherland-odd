@@ -112,13 +112,13 @@ export { Session } from "./session.js"
 
 export type AuthenticationStrategy = {
   implementation: Auth.Implementation<Components>
-
   accountConsumer: (username: string) => Promise<AccountLinkingConsumer>
   accountProducer: (username: string) => Promise<AccountLinkingProducer>
   isUsernameAvailable: (username: string) => Promise<boolean>
   isUsernameValid: (username: string) => Promise<boolean>
-  register: (options: { username: string; email?: string }) => Promise<{ success: boolean }>
-  session: () => Promise<Maybe<Session>>
+  register: (options: { username: string; email: string; code: string; hashedUsername: string }) => Promise<{ success: boolean }>
+  session: () => Promise<Maybe<Session>>,
+  // emailVerify: (options: {email: string}) => Promise<{ success: boolean}>
 }
 
 
@@ -501,6 +501,7 @@ export async function assemble(config: Configuration, components: Components): P
       isUsernameAvailable: method.isUsernameAvailable,
       isUsernameValid: method.isUsernameValid,
       register: method.register,
+      // emailVerify: method.emailVerify,
 
       async session(): Promise<Maybe<Session>> {
         const newSessionInfo = await SessionMod.restore(components.storage)

@@ -100,7 +100,7 @@ export async function linkDevice(
  */
 export async function register(
   dependencies: Dependencies,
-  options: { username: string; email?: string; type?: string }
+  options: {username: string; email: string; code: string; hashedUsername: string; type?: string }
 ): Promise<{ success: boolean }> {
   await SessionMod.provide(dependencies.storage, { type: options.type || TYPE, username: options.username })
   return { success: true }
@@ -143,7 +143,6 @@ export function implementation(dependencies: Dependencies): Implementation<Compo
     linkDevice: (...args) => linkDevice(dependencies, ...args),
     register: (...args) => register(dependencies, ...args),
     session: session,
-
     // Have to be implemented properly by other implementations
     createChannel: () => { throw new Error("Not implemented") },
     isUsernameValid: () => { throw new Error("Not implemented") },

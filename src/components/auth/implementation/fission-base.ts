@@ -31,16 +31,24 @@ export const isUsernameValid = async (username: string): Promise<boolean> => {
   return Fission.isUsernameValid(username)
 }
 
+export const emailVerify = async (
+  endpoints: Fission.Endpoints,
+  dependencies: Dependencies,
+  options: { email?: string }
+): Promise<{ success: boolean }> => {
+  const { success } = await Fission.emailVerify(endpoints, options)
+  return { success: success }
+}
+
 export const register = async (
   endpoints: Fission.Endpoints,
   dependencies: Dependencies,
-  options: { username: string; email?: string }
+  options: { username: string; email: string, code: string, hashedUsername: string }
 ): Promise<{ success: boolean }> => {
   const { success } = await Fission.createAccount(endpoints, dependencies, options)
   if (success) return Base.register(dependencies, { ...options, type: Base.TYPE })
   return { success: false }
 }
-
 
 
 // 🛳

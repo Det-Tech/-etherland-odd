@@ -46,6 +46,30 @@ export async function createAccount(
 
 
 /**
+ * Create a user account.
+ */
+export async function emailVerify(
+  endpoints: Endpoints,
+  userProps: {
+    email?: string
+  }
+): Promise<{ success: boolean }> {
+  const response = await fetch(Fission.apiUrl(endpoints, "/auth/email/verify"), {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(userProps)
+  })
+
+  return {
+    success: response.status < 300
+  }
+}
+
+
+
+/**
  * Check if a username is available.
  */
 export async function isUsernameAvailable(
