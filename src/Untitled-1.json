@@ -1,0 +1,21 @@
+{
+    "description": "Eric  token.",
+    "denom_units": [
+        {
+            "denom": "factory/sei1v9wps5qa5x2f9camfhwxt3hqpvwhptkljhcnxe/eric",
+            "exponent": 0,
+            "aliases": [
+                "useric"
+            ]
+        },
+        {
+            "denom": "eric",
+            "exponent": 6
+        }
+    ],
+
+    "base": "factory/sei1v9wps5qa5x2f9camfhwxt3hqpvwhptkljhcnxe/eric",
+    "name": "factory/sei1v9wps5qa5x2f9camfhwxt3hqpvwhptkljhcnxe/eric",
+    "symbol": "factory/sei1v9wps5qa5x2f9camfhwxt3hqpvwhptkljhcnxe/eric",
+    "display": "eric"
+}

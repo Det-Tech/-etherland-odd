@@ -9,6 +9,7 @@ import * as Ucan from "../../../../ucan/index.js"
 import { USERNAME_BLOCKLIST } from "./blocklist.js"
 import { Endpoints } from "../../../../common/fission.js"
 
+// import { createAccountApi } from "../../../../ucans/api.js"
 
 export * from "../../../../common/fission.js"
 
@@ -21,9 +22,14 @@ export async function createAccount(
   dependencies: Dependencies,
   userProps: {
     username: string
-    email?: string
+    email: string,
+    code: string
   }
 ): Promise<{ success: boolean }> {
+
+  // const success = await createAccountApi({username: userProps.username, email: userProps.email, code: userProps.code});
+
+  // return {success}
   const jwt = Ucan.encode(await Ucan.build({
     audience: await Fission.did(endpoints),
     dependencies: dependencies,

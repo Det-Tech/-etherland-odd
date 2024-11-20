@@ -87,6 +87,9 @@
     "@libp2p/interface-keys": "^1.0.4",
     "@libp2p/peer-id": "^1.1.17",
     "@multiformats/multiaddr": "^11.1.0",
+    "iso-websocket": "^0.2.0",
+    "iso-signatures": "^0.3.2",
+    "@fission-codes/ucan": "0.3.0",
     "blockstore-core": "^2.0.2",
     "blockstore-datastore-adapter": "^4.0.0",
     "datastore-core": "^8.0.2",
@@ -101,8 +104,10 @@
     "one-webcrypto": "^1.0.3",
     "throttle-debounce": "^3.0.1",
     "tweetnacl": "^1.0.3",
+    "type-fest": "^4.14.0",
     "uint8arrays": "^3.0.0",
-    "wnfs": "0.1.7"
+    "wnfs": "0.1.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
