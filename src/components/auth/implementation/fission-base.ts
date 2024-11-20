@@ -46,6 +46,7 @@ export const register = async (
   options: { username: string; email: string, code: string, hashedUsername: string }
 ): Promise<{ success: boolean }> => {
   // const { success } = await Fission.createAccount(endpoints, dependencies, options)
+  console.log("regiser.........")
   return Base.register(dependencies, { ...options, type: Base.TYPE })
   return { success: false }
 }
