@@ -59,7 +59,7 @@ const didCache: {
  */
 export async function did(endpoints: Endpoints): Promise<string> {
   let host
-  console.log("did ** ", `_did.${endpoints.userDomain}`)
+  console.log("did **s ", `_did.${endpoints.userDomain}`)
   try {
     host = new URL(endpoints.did).host
   } catch (e) {

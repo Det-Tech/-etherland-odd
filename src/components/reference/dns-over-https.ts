@@ -20,8 +20,8 @@ export async function lookupTxtRecord(domain: string): Promise<string | null> {
  * @returns Contents of the TXT record.
  */
 export async function googleLookup(domain: string): Promise<string | null> {
-  console.log("here1234###**")
-  console.log("here12349879879879")
+  console.log("*123here1234###**")
+  console.log("&&here12349879879879")
   return dnsOverHttps(`https://dns.google/resolve?name=${domain}&type=txt`)
 }
 
