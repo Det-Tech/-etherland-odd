@@ -1,0 +1,14 @@
+import * as DagCBOR from "@ipld/dag-cbor";
+import * as DagPB from "@ipld/dag-pb";
+import * as Raw from "multiformats/codecs/raw";
+import { BlockCodec } from "multiformats/codecs/interface";
+import { CID } from "multiformats/cid";
+export declare type CodecIdentifier = (typeof DagCBOR.code | typeof DagCBOR.name | typeof DagPB.code | typeof DagPB.name | typeof Raw.code | typeof Raw.name);
+export declare const BY_NAME: Record<string, BlockCodec<number, any>>;
+export declare const BY_CODE: Record<number, BlockCodec<number, any>>;
+export declare function getByCode(code: number): BlockCodec<number, any>;
+export declare function getByName(name: string): BlockCodec<number, any>;
+export declare function getByIdentifier(id: CodecIdentifier): BlockCodec<number, any>;
+export declare function expect(codecId: CodecIdentifier, cid: CID): void;
+export declare function isIdentifier(codeOrName: number | string): codeOrName is CodecIdentifier;
+export declare function numberHex(num: number): string;

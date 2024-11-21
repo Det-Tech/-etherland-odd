@@ -1,0 +1,16 @@
+import type { CID } from "multiformats/cid";
+import * as Crypto from "../../../components/crypto/implementation.js";
+import * as Depot from "../../../components/depot/implementation.js";
+import { BareNameFilter, PrivateName } from "./namefilter.js";
+import { DecryptedNode, PrivateAddResult, Revision } from "./types.js";
+import { Maybe } from "../../../common/index.js";
+import MMPT from "./mmpt.js";
+export declare const addNode: (depot: Depot.Implementation, crypto: Crypto.Implementation, mmpt: MMPT, node: DecryptedNode, key: Uint8Array) => Promise<PrivateAddResult>;
+export declare const readNode: (depot: Depot.Implementation, crypto: Crypto.Implementation, cid: CID, key: Uint8Array) => Promise<DecryptedNode>;
+export declare const getByName: (depot: Depot.Implementation, crypto: Crypto.Implementation, mmpt: MMPT, name: PrivateName, key: Uint8Array) => Promise<Maybe<DecryptedNode>>;
+export declare const getByCID: (depot: Depot.Implementation, crypto: Crypto.Implementation, cid: CID, key: Uint8Array) => Promise<DecryptedNode>;
+export declare const getLatestByName: (depot: Depot.Implementation, crypto: Crypto.Implementation, mmpt: MMPT, name: PrivateName, key: Uint8Array) => Promise<Maybe<DecryptedNode>>;
+export declare const getLatestByCID: (depot: Depot.Implementation, crypto: Crypto.Implementation, mmpt: MMPT, cid: CID, key: Uint8Array) => Promise<DecryptedNode>;
+export declare const getLatestByBareNameFilter: (depot: Depot.Implementation, crypto: Crypto.Implementation, mmpt: MMPT, bareName: BareNameFilter, key: Uint8Array) => Promise<Maybe<DecryptedNode>>;
+export declare const findLatestRevision: (crypto: Crypto.Implementation, mmpt: MMPT, bareName: BareNameFilter, key: Uint8Array, lastKnownRevision: number) => Promise<Maybe<Revision>>;
+export declare const getRevision: (crypto: Crypto.Implementation, mmpt: MMPT, bareName: BareNameFilter, key: Uint8Array, revision: number) => Promise<Maybe<Revision>>;

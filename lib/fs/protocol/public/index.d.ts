@@ -1,0 +1,13 @@
+import { CID } from "multiformats/cid";
+import * as Depot from "../../../components/depot/implementation.js";
+import { Links, SimpleLinks } from "../../types.js";
+import { TreeInfo, FileInfo, Skeleton, PutDetails } from "./types.js";
+import { Metadata } from "../../metadata.js";
+import { Maybe } from "../../../common/index.js";
+export declare const putTree: (depot: Depot.Implementation, links: Links, skeletonVal: Skeleton, metadataVal: Metadata, previousCID: Maybe<CID>) => Promise<PutDetails>;
+export declare const putFile: (depot: Depot.Implementation, content: Uint8Array, metadataVal: Metadata, previousCID: Maybe<CID>) => Promise<PutDetails>;
+export declare const get: (depot: Depot.Implementation, cid: CID) => Promise<TreeInfo | FileInfo>;
+export declare const getValue: (depot: Depot.Implementation, linksOrCID: SimpleLinks | CID, name: string) => Promise<unknown>;
+export declare const getValueFromLinks: (depot: Depot.Implementation, links: SimpleLinks, name: string) => Promise<unknown>;
+export declare const getAndCheckValue: <T>(depot: Depot.Implementation, linksOrCid: SimpleLinks | CID, name: string, checkFn: (val: any) => val is T, canBeNull?: boolean) => Promise<T>;
+export declare const checkValue: <T>(val: any, name: string, checkFn: (val: any) => val is T, canBeNull?: boolean) => T;

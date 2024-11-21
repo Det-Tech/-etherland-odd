@@ -1,0 +1,17 @@
+import { SupportedEncodings } from "uint8arrays/util/bases.js";
+import * as Crypto from "../../../components/crypto/implementation.js";
+import { BloomFilter } from "fission-bloom-filters";
+import { Opaque } from "../../../common/types.js";
+export declare type PrivateName = Opaque<"PrivateName", string>;
+export declare type BareNameFilter = Opaque<"BareNameFilter", string>;
+export declare type RevisionNameFilter = Opaque<"RevisionNameFilter", string>;
+export declare type SaturatedNameFilter = Opaque<"SaturatedNameFilter", string>;
+export declare const createBare: (crypto: Crypto.Implementation, key: Uint8Array) => Promise<BareNameFilter>;
+export declare const addToBare: (crypto: Crypto.Implementation, bareFilter: BareNameFilter, toAdd: Uint8Array) => Promise<BareNameFilter>;
+export declare const addRevision: (crypto: Crypto.Implementation, bareFilter: BareNameFilter, key: Uint8Array, revision: number) => Promise<RevisionNameFilter>;
+export declare const toPrivateName: (crypto: Crypto.Implementation, revisionFilter: RevisionNameFilter) => Promise<PrivateName>;
+export declare const toHash: (crypto: Crypto.Implementation, filter: BloomFilter) => Promise<PrivateName>;
+export declare const saturate: (crypto: Crypto.Implementation, filter: RevisionNameFilter | BareNameFilter, threshold?: number) => Promise<SaturatedNameFilter>;
+export declare const toHex: (filter: BloomFilter) => string;
+export declare const fromHex: (string: string) => BloomFilter;
+export declare function legacyEncodingMistake(input: Uint8Array, inputEncoding: SupportedEncodings): Uint8Array;

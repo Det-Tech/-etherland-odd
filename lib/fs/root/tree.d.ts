@@ -1,0 +1,71 @@
+import { CID } from "multiformats/cid";
+import { DistinctivePath } from "../../path/index.js";
+import { Permissions } from "../../permissions.js";
+import { Puttable, SimpleLink, SimpleLinks, UnixTree } from "../types.js";
+import * as Crypto from "../../components/crypto/implementation.js";
+import * as Depot from "../../components/depot/implementation.js";
+import * as Manners from "../../components/manners/implementation.js";
+import * as Reference from "../../components/reference/implementation.js";
+import * as Storage from "../../components/storage/implementation.js";
+import * as Path from "../../path/index.js";
+import * as Versions from "../versions.js";
+import BareTree from "../bare/tree.js";
+import MMPT from "../protocol/private/mmpt.js";
+import PrivateTree from "../v1/PrivateTree.js";
+import PrivateFile from "../v1/PrivateFile.js";
+declare type Dependencies = {
+    crypto: Crypto.Implementation;
+    depot: Depot.Implementation;
+    manners: Manners.Implementation;
+    reference: Reference.Implementation;
+    storage: Storage.Implementation;
+};
+declare type PrivateNode = PrivateTree | PrivateFile;
+export default class RootTree implements Puttable {
+    dependencies: Dependencies;
+    links: SimpleLinks;
+    mmpt: MMPT;
+    privateLog: Array<SimpleLink>;
+    sharedCounter: number;
+    sharedLinks: SimpleLinks;
+    publicTree: UnixTree & Puttable;
+    prettyTree: BareTree;
+    privateNodes: Record<string, PrivateNode>;
+    constructor({ dependencies, links, mmpt, privateLog, sharedCounter, sharedLinks, publicTree, prettyTree, privateNodes }: {
+        dependencies: Dependencies;
+        links: SimpleLinks;
+        mmpt: MMPT;
+        privateLog: Array<SimpleLink>;
+        sharedCounter: number;
+        sharedLinks: SimpleLinks;
+        publicTree: UnixTree & Puttable;
+        prettyTree: BareTree;
+        privateNodes: Record<string, PrivateNode>;
+    });
+    static empty({ accountDID, dependencies, rootKey, wnfsWasm }: {
+        accountDID: string;
+        dependencies: Dependencies;
+        rootKey: Uint8Array;
+        wnfsWasm?: boolean;
+    }): Promise<RootTree>;
+    static fromCID({ accountDID, dependencies, cid, permissions }: {
+        accountDID: string;
+        dependencies: Dependencies;
+        cid: CID;
+        permissions?: Permissions;
+    }): Promise<RootTree>;
+    put(): Promise<CID>;
+    putDetailed(): Promise<Depot.PutResult>;
+    updateLink(name: string, result: Depot.PutResult): this;
+    updatePuttable(name: string, puttable: Puttable): Promise<this>;
+    findPrivateNode(path: DistinctivePath<Path.Segments>): [DistinctivePath<Path.Segments>, PrivateNode | null];
+    static LOG_CHUNK_SIZE: number;
+    addPrivateLogEntry(depot: Depot.Implementation, cid: CID): Promise<void>;
+    addShares(links: SimpleLink[]): Promise<this>;
+    static getSharedLinks(depot: Depot.Implementation, cid: CID): Promise<SimpleLinks>;
+    setSharedCounter(counter: number): Promise<number>;
+    bumpSharedCounter(): Promise<number>;
+    setVersion(v: Versions.SemVer): Promise<this>;
+    getVersion(): Promise<Versions.SemVer | null>;
+}
+export {};

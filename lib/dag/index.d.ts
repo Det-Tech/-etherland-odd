@@ -1,0 +1,11 @@
+import { CID } from "multiformats/cid";
+import * as DagPB from "@ipld/dag-pb";
+import * as Codecs from "./codecs.js";
+import * as Depot from "../components/depot/implementation.js";
+export declare const PB_IPLD_DATA: Uint8Array;
+export declare function fromBytes(storeCodecId: Codecs.CodecIdentifier, bytes: Uint8Array): unknown;
+export declare function toBytes(storeCodecId: Codecs.CodecIdentifier, dagNode: unknown): Uint8Array;
+export declare function get(depot: Depot.Implementation, cid: CID): Promise<unknown>;
+export declare function getCBOR(depot: Depot.Implementation, cid: CID): Promise<unknown>;
+export declare function getPB(depot: Depot.Implementation, cid: CID): Promise<DagPB.PBNode>;
+export declare function putPB(depot: Depot.Implementation, links: DagPB.PBLink[]): Promise<CID>;

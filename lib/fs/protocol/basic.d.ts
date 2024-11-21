@@ -1,0 +1,12 @@
+import { CID } from "multiformats/cid";
+import * as Crypto from "../../components/crypto/implementation.js";
+import * as Depot from "../../components/depot/implementation.js";
+import { SimpleLinks, Links } from "../types.js";
+export declare const DEFAULT_AES_ALG = Crypto.SymmAlg.AES_CTR;
+export declare const getFile: (depot: Depot.Implementation, cid: CID) => Promise<Uint8Array>;
+export declare const getEncryptedFile: (depot: Depot.Implementation, crypto: Crypto.Implementation, cid: CID, key: Uint8Array) => Promise<Uint8Array>;
+export declare const putFile: (depot: Depot.Implementation, content: Uint8Array) => Promise<Depot.PutResult>;
+export declare const putEncryptedFile: (depot: Depot.Implementation, crypto: Crypto.Implementation, content: Uint8Array | Object, key: Uint8Array) => Promise<Depot.PutResult>;
+export declare const getSimpleLinks: (depot: Depot.Implementation, cid: CID) => Promise<SimpleLinks>;
+export declare const getFileSystemLinks: (depot: Depot.Implementation, cid: CID) => Promise<Links>;
+export declare const putLinks: (depot: Depot.Implementation, links: Links | SimpleLinks) => Promise<Depot.PutResult>;
