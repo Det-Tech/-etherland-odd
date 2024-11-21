@@ -7,6 +7,7 @@
  * @returns Contents of the TXT record.
  */
 export async function lookupTxtRecord(domain: string): Promise<string | null> {
+  console.log("hey bro")
   return Promise.any([
     googleLookup(domain),
     cloudflareLookup(domain)
