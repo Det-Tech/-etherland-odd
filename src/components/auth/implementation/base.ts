@@ -102,8 +102,9 @@ export async function register(
   dependencies: Dependencies,
   options: {username: string; email: string; code: string; hashedUsername: string; type?: string }
 ): Promise<{ success: boolean }> {
-  console.log("sesssion register ")
+  console.log("sesssion register 123")
   await SessionMod.provide(dependencies.storage, { type: options.type || TYPE, username: options.username })
+  console.log("bro its perfect")
   return { success: true }
 }
 
