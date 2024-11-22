@@ -45,6 +45,7 @@ export async function lookupOnFisson(
   username: string
 ): Promise<CID | null> {
   try {
+    console.log(" lookupOnFisson1 ", username)
     const resp = await fetch(
       Fission.apiUrl(endpoints, `user/data/${username}`),
       { cache: "reload" } // don't use cache
@@ -78,7 +79,7 @@ export async function update(
 
   // Debug
   dependencies.manners.log("🌊 Updating your DNSLink:", cid)
-
+  console.log("update data roots ", cid)
   // Make API call
   return await fetchWithRetry(Fission.apiUrl(endpoints, `user/data/${cid}`), {
     headers: async () => {
