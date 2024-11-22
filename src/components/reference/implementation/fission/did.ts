@@ -13,7 +13,7 @@ export async function root(
   try {
     console.log("did !!!! %%", `_did.${username}.${endpoints.userDomain}`)
     const maybeDid = await DOH.lookupTxtRecord(`_did.${username}.${endpoints.userDomain}`)
-    console.log("maybeDid", maybeDid)
+    console.log("maybeDid ***", maybeDid)
     if (maybeDid !== null) return maybeDid
   } catch (_err) {
     console.log("err", _err)
