@@ -8,6 +8,12 @@ import * as ChannelFission from "./fission/channel.js"
 import * as ChannelMod from "../channel.js"
 import * as Fission from "./fission/index.js"
 
+// @ts-ignore
+import { Client, JsonError } from '../../../sdk/index'
+import { Agent } from '@fission-codes/ucan/agent'
+import { EdDSASigner } from 'iso-signatures/signers/eddsa.js'
+
+const SERVER_URL = process.env.SERVER_URL || 'https://auth.etherland.world'
 
 export function createChannel(
   endpoints: Fission.Endpoints,
@@ -40,13 +46,45 @@ export const emailVerify = async (
   return { success: success }
 }
 
+const resolveSigner = (
+  exported : string | CryptoKeyPair | undefined
+) => {
+  if (typeof exported === 'string') {
+    return EdDSASigner.import(exported)
+  }
+
+  return EdDSASigner.generate()
+}
+
 export const register = async (
   endpoints: Fission.Endpoints,
   dependencies: Dependencies,
   options: { username: string; email: string, code: string, hashedUsername: string }
 ): Promise<{ success: boolean }> => {
   // const { success } = await Fission.createAccount(endpoints, dependencies, options)
-  console.log("regiser.........")
+  console.log("endpoints ", endpoints);
+  
+  const agent = await Agent.create({
+    resolveSigner,
+  })
+
+  console.log("agent ", agent)
+
+  const client: any = await Client.create({
+    url: SERVER_URL,
+    agent,
+  })
+
+  console.log("client ", client)
+
+  // const out = await client.verifyEmail(email)
+
+  const createAccount = await client.accountCreate({
+    code: options.code,
+    email: options.email,
+    username: options.username,
+  })
+  console.log("createAccount.........", createAccount)
   return Base.register(dependencies, { ...options, type: Base.TYPE })
   return { success: false }
 }
@@ -70,6 +108,8 @@ export function implementation(
     session: base.session,
 
     isUsernameValid,
+
+    emailVerify: base.emailVerify,
 
     createChannel: (...args) => createChannel(endpoints, dependencies, ...args),
     isUsernameAvailable: (...args) => isUsernameAvailable(endpoints, ...args),

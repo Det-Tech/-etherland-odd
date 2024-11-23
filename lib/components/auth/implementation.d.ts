@@ -19,6 +19,11 @@ export declare type Implementation<C> = {
     }) => Promise<{
         success: boolean;
     }>;
+    emailVerify: (options: {
+        email: string;
+    }) => Promise<{
+        success: boolean;
+    }>;
     canDelegateAccount: (username: string) => Promise<boolean>;
     delegateAccount: (username: string, audience: string) => Promise<Record<string, unknown>>;
     linkDevice: (username: string, data: Record<string, unknown>) => Promise<void>;

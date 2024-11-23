@@ -118,7 +118,7 @@ export type AuthenticationStrategy = {
   isUsernameValid: (username: string) => Promise<boolean>
   register: (options: { username: string; email: string; code: string; hashedUsername: string }) => Promise<{ success: boolean }>
   session: () => Promise<Maybe<Session>>,
-  // emailVerify: (options: {email: string}) => Promise<{ success: boolean}>
+  emailVerify: (options: {email: string}) => Promise<{ success: boolean}>
 }
 
 
@@ -501,7 +501,7 @@ export async function assemble(config: Configuration, components: Components): P
       isUsernameAvailable: method.isUsernameAvailable,
       isUsernameValid: method.isUsernameValid,
       register: method.register,
-      // emailVerify: method.emailVerify,
+      emailVerify: method.emailVerify,
 
       async session(): Promise<Maybe<Session>> {
         const newSessionInfo = await SessionMod.restore(components.storage)

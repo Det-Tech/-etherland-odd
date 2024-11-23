@@ -187,10 +187,13 @@ export function implementation(
     delegateAccount: (...args) => delegateAccount(dependencies, ...args),
     linkDevice: (...args) => linkDevice(dependencies, ...args),
 
+
     // Have to be implemented properly by other implementations
     createChannel: base.createChannel,
     isUsernameValid: base.isUsernameValid,
     isUsernameAvailable: base.isUsernameAvailable,
     register: base.register,
+
+    emailVerify: base.emailVerify,
   }
 }

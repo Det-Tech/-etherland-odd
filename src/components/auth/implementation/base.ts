@@ -108,6 +108,16 @@ export async function register(
   return { success: true }
 }
 
+export async function emailVerify(
+  dependencies: Dependencies,
+  options: {email: string; type?: string }
+): Promise<{ success: boolean }> {
+  console.log("emailVerify register 123")
+  // await SessionMod.provide(dependencies.storage, { type: options.type || TYPE, username: options.username })
+  console.log("emailVerify perfect")
+  return { success: true }
+}
+
 export async function session(
   components: Components,
   authedUsername: Maybe<string>,
@@ -144,6 +154,9 @@ export function implementation(dependencies: Dependencies): Implementation<Compo
     delegateAccount: (...args) => delegateAccount(dependencies, ...args),
     linkDevice: (...args) => linkDevice(dependencies, ...args),
     register: (...args) => register(dependencies, ...args),
+
+    emailVerify: (...args) => emailVerify(dependencies, ...args),
+    
     session: session,
     // Have to be implemented properly by other implementations
     createChannel: () => { throw new Error("Not implemented") },

@@ -25,6 +25,8 @@ export function implementation(
     linkDevice: wnfs.linkDevice,
     session: wnfs.session,
 
+    emailVerify: wnfs.emailVerify,
+
     createChannel: fissionBase.createChannel,
     isUsernameValid: fissionBase.isUsernameValid,
     isUsernameAvailable: fissionBase.isUsernameAvailable,

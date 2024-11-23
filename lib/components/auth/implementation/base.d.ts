@@ -32,6 +32,12 @@ export declare function register(dependencies: Dependencies, options: {
 }): Promise<{
     success: boolean;
 }>;
+export declare function emailVerify(dependencies: Dependencies, options: {
+    email: string;
+    type?: string;
+}): Promise<{
+    success: boolean;
+}>;
 export declare function session(components: Components, authedUsername: Maybe<string>, config: Configuration, eventEmitters: {
     session: Events.Emitter<Events.Session<Session>>;
 }): Promise<Maybe<Session>>;

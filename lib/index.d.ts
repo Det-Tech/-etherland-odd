@@ -47,6 +47,11 @@ export declare type AuthenticationStrategy = {
         success: boolean;
     }>;
     session: () => Promise<Maybe<Session>>;
+    emailVerify: (options: {
+        email: string;
+    }) => Promise<{
+        success: boolean;
+    }>;
 };
 export declare type Program = ShortHands & Events.ListenTo<Events.All<Session>> & {
     /**
