@@ -8,6 +8,7 @@ import * as Ucan from "../../../../ucan/index.js"
 
 import { decodeCID } from "../../../../common/cid.js"
 import { Dependencies } from "../base.js"
+import { getAccountInfo } from "../../../auth/implementation/fission-base.js"
 
 
 /**
@@ -21,6 +22,8 @@ export async function lookup(
   dependencies: Dependencies,
   username: string
 ): Promise<CID | null> {
+
+  
   const maybeRoot = await lookupOnFisson(endpoints, dependencies, username)
   if (!maybeRoot) return null
   if (maybeRoot !== null) return maybeRoot
@@ -50,7 +53,8 @@ export async function lookupOnFisson(
       Fission.apiUrl(endpoints, `user/data/${username}`),
       { cache: "reload" } // don't use cache
     )
-    const cid = await resp.json()
+    const cid = await getAccountInfo();
+    // const cid = await resp.json()
     return decodeCID(cid)
 
   } catch (err) {

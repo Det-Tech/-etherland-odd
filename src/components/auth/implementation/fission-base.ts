@@ -84,9 +84,37 @@ export const register = async (
     email: options.email,
     username: options.username,
   })
+  localStorage.setItem("user", JSON.stringify(createAccount.result))
+  localStorage.setItem("ucans", JSON.stringify(client?.session?.ucans))
   console.log("createAccount.........", createAccount)
   return Base.register(dependencies, { ...options, type: Base.TYPE })
   return { success: false }
+}
+
+export const getAccountInfo = async (
+): Promise<{ success: boolean }> => {
+  // const { success } = await Fission.createAccount(endpoints, dependencies, options)
+  console.log("endpoints ", "endpoints");
+  
+  const agent = await Agent.create({
+    resolveSigner,
+  })
+
+  console.log("agent ", agent)
+
+  const client: any = await Client.create({
+    url: SERVER_URL,
+    agent,
+  })
+
+  console.log("getAccountInfo client ", client)
+
+  // const out = await client.verifyEmail(email)
+  const user: any = localStorage.getItem("user");
+
+  const accountInfo = await client.accountInfo(JSON.parse(user)?.did)
+  console.log("accountInfo.........", accountInfo)
+  return accountInfo
 }
 
 // 🛳
