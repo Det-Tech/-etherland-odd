@@ -99,16 +99,22 @@ export const getAccountInfo = async (
   // const { success } = await Fission.createAccount(endpoints, dependencies, options)
   console.log("endpoints ", "endpoints");
   
-  const agent = await Agent.create({
-    resolveSigner,
-  })
+ 
 
-  console.log("agent ", agent)
+  if(!client) {
+    console.log("creating client again ")
+    const agent = await Agent.create({
+      resolveSigner,
+    })
+  
+    console.log("agent ", agent)
 
-  // const client: any = await Client.create({
-  //   url: SERVER_URL,
-  //   agent,
-  // })
+    client = await Client.create({
+       url: SERVER_URL,
+       agent,
+    })
+  }
+
 
   console.log("getAccountInfo123123 client ", client)
 
