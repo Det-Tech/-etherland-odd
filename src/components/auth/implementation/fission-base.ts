@@ -111,7 +111,9 @@ export const getAccountInfo = async (
 
   // const out = await client.verifyEmail(email)
   const user: any = localStorage.getItem("user");
-
+  const ucans: any = localStorage.getItem("ucans");
+  console.log("user did.........", user, JSON.parse(user)?.did)
+  console.log("user ucans.........", user, JSON.parse(ucans))
   const accountInfo = await client.accountInfo(JSON.parse(user)?.did)
   console.log("accountInfo.........", accountInfo)
   return accountInfo
