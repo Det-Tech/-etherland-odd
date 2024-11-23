@@ -96,36 +96,39 @@ export const register = async (
 
 export const getAccountInfo = async (
 ): Promise<{ data: any }> => {
-  // const { success } = await Fission.createAccount(endpoints, dependencies, options)
-  console.log("endpoints ", "endpoints");
-  
- 
+  try{
 
-  if(!client) {
-    console.log("creating client again ")
-    const agent = await Agent.create({
-      resolveSigner,
-    })
+    // const { success } = await Fission.createAccount(endpoints, dependencies, options)
+    console.log("endpoints ", "endpoints");
   
-    console.log("agent ", agent)
-
-    client = await Client.create({
-       url: SERVER_URL,
-       agent,
-    })
+    if(!client) {
+      console.log("creating client again ")
+      const agent = await Agent.create({
+        resolveSigner,
+      })
+    
+      console.log("agent ", agent)
+  
+      client = await Client.create({
+         url: SERVER_URL,
+         agent,
+      })
+    }
+  
+  
+    console.log("getAccountInfo123123 client ", client)
+  
+    // const out = await client.verifyEmail(email)
+    const user: any = localStorage.getItem("user");
+    const ucans: any = localStorage.getItem("ucans");
+    console.log("user did.........", user, JSON.parse(user)?.did)
+    console.log("user ucans.........", user, JSON.parse(ucans))
+    const accountInfo = await client.accountInfo(JSON.parse(user)?.did)
+    console.log("accountInfo.........", accountInfo)
+    return { data: accountInfo?.result}
+  }catch(err){
+    return { data: null};
   }
-
-
-  console.log("getAccountInfo123123 client ", client)
-
-  // const out = await client.verifyEmail(email)
-  const user: any = localStorage.getItem("user");
-  const ucans: any = localStorage.getItem("ucans");
-  console.log("user did.........", user, JSON.parse(user)?.did)
-  console.log("user ucans.........", user, JSON.parse(ucans))
-  const accountInfo = await client.accountInfo(JSON.parse(user)?.did)
-  console.log("accountInfo.........", accountInfo)
-  return accountInfo?.result
 }
 
 // 🛳
