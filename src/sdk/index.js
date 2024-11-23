@@ -159,8 +159,16 @@ export class Client {
       },
     })
 
-    const headers = Bearer.encode(delegation, store)
+    let headers = Bearer.encode(delegation, store)
     console.log("headers: && ", headers)
+    if(localStorage.getItem("ucans")) {
+      const data = JSON.parse(localStorage.getItem("ucans"));
+      console.log("data ", data)
+      headers = {
+        ...headers,
+        ucans: [...data].join(', '),
+      }
+    }
     const account =
       await /** @type {typeof request.json.get<T.AccountInfo>} */ (
         request.json.get
