@@ -1,6 +1,6 @@
 {
   "name": "@etherland/odd",
-  "version": "0.38.3",
+  "version": "0.38.4",
   "description": "ODD SDK",
   "keywords": [
     "WebCrypto",

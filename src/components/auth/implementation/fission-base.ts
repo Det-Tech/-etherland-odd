@@ -89,7 +89,6 @@ export const register = async (
   return { success: false }
 }
 
-
 // 🛳
 
 
@@ -109,10 +108,12 @@ export function implementation(
 
     isUsernameValid,
 
-    emailVerify: base.emailVerify,
 
     createChannel: (...args) => createChannel(endpoints, dependencies, ...args),
     isUsernameAvailable: (...args) => isUsernameAvailable(endpoints, ...args),
-    register: (...args) => register(endpoints, dependencies, ...args)
+    register: (...args) => register(endpoints, dependencies, ...args),
+
+    emailVerify: (...args) => emailVerify(endpoints, dependencies, ...args)
+
   }
 }
