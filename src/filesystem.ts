@@ -42,10 +42,13 @@ export async function loadFileSystem({ config, dependencies, eventEmitter, rootK
   // Account
   const account = { username, rootDID: await reference.didRoot.lookup(username) }
 
+  console.log("file System account ", account)
   // Determine the correct CID of the file system to load
   const dataCid = navigator.onLine ? await getDataRoot(reference, username, { maxRetries: 20 }) : null
   const logIdx = dataCid ? cidLog.indexOf(dataCid) : -1
 
+  console.log("dataCid ", dataCid, cidLog)
+  console.log("logIdx ", logIdx)
   if (!navigator.onLine) {
     // Offline, use local CID
     cid = cidLog.newest()
