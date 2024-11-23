@@ -89,6 +89,7 @@ export const register = async (
   localStorage.setItem("user", JSON.stringify(createAccount.result))
   localStorage.setItem("ucans", JSON.stringify(client?.session?.ucans))
   console.log("createAccount.........", createAccount)
+  console.log("client&&& ", client)
   return Base.register(dependencies, { ...options, type: Base.TYPE })
   return { success: false }
 }
@@ -109,7 +110,7 @@ export const getAccountInfo = async (
   //   agent,
   // })
 
-  console.log("getAccountInfo client ", client)
+  console.log("getAccountInfo123123 client ", client)
 
   // const out = await client.verifyEmail(email)
   const user: any = localStorage.getItem("user");
