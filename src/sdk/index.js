@@ -160,6 +160,7 @@ export class Client {
     })
 
     const headers = Bearer.encode(delegation, store)
+    console.log("headers: && ", headers)
     const account =
       await /** @type {typeof request.json.get<T.AccountInfo>} */ (
         request.json.get
