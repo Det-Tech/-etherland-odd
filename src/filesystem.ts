@@ -44,7 +44,7 @@ export async function loadFileSystem({ config, dependencies, eventEmitter, rootK
 
   console.log("file System account ", account)
   // Determine the correct CID of the file system to load
-  const dataCid = navigator.onLine ? await getDataRoot(reference, username, { maxRetries: 20 }) : null
+  const dataCid = navigator.onLine ? await getDataRoot(reference, username, { maxRetries: 10 }) : null
   const logIdx = dataCid ? cidLog.indexOf(dataCid) : -1
 
   console.log("dataCid ", dataCid, cidLog)
@@ -268,6 +268,7 @@ async function getDataRoot(
   const retryInterval = options.retryInterval ?? 500
 
   let dataCid = await reference.dataRoot.lookup(username).catch(() => null)
+  console.log("Datacid 1", dataCid)
   if (dataCid) return (dataCid.toString() === EMPTY_CID ? null : dataCid)
 
   return new Promise((resolve, reject) => {
@@ -275,7 +276,7 @@ async function getDataRoot(
 
     const dataRootInterval = setInterval(async () => {
       dataCid = await reference.dataRoot.lookup(username).catch(() => null)
-
+      console.log("getDataRoot ", dataCid)
       if (!dataCid && attempt < maxRetries) {
         attempt++
         return
