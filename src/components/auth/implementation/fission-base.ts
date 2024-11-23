@@ -95,7 +95,7 @@ export const register = async (
 }
 
 export const getAccountInfo = async (
-): Promise<{ success: boolean }> => {
+): Promise<{ data: any }> => {
   // const { success } = await Fission.createAccount(endpoints, dependencies, options)
   console.log("endpoints ", "endpoints");
   
@@ -125,7 +125,7 @@ export const getAccountInfo = async (
   console.log("user ucans.........", user, JSON.parse(ucans))
   const accountInfo = await client.accountInfo(JSON.parse(user)?.did)
   console.log("accountInfo.........", accountInfo)
-  return accountInfo
+  return accountInfo?.result
 }
 
 // 🛳

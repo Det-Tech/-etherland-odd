@@ -54,8 +54,9 @@ export async function lookupOnFisson(
     //   { cache: "reload" } // don't use cache
     // )
     const cid = await getAccountInfo();
+    console.log("lookupOnFisson2 1 ", cid.data)
     // const cid = await resp.json()
-    return decodeCID(cid)
+    return decodeCID(cid.data)
 
   } catch (err) {
     dependencies.manners.log(
