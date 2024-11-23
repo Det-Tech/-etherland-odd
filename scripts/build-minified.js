@@ -3,7 +3,7 @@ import { globby } from "globby"
 import esbuild from "esbuild"
 import fs from "fs"
 import zlib from "zlib"
-
+import path from "path"
 
 const globalName = "oddjs"
 
@@ -36,6 +36,7 @@ await esbuild.build({
 fs.renameSync("dist/index.js", "dist/index.esm.min.js")
 fs.renameSync("dist/index.js.map", "dist/index.esm.min.js.map")
 
+ 
 
 
 // UMD
@@ -85,6 +86,28 @@ await esbuild.build({
     footer: { js: UMD.footer },
 })
 
+function copyDirectory(source, destination) {
+    // Ensure the destination directory exists
+    fs.mkdirSync(destination, { recursive: true });
+
+    // Read all items in the source directory
+    const items = fs.readdirSync(source);
+
+    items.forEach(item => {
+        const sourcePath = path.join(source, item);
+        const destPath = path.join(destination, item);
+
+        // Check if the item is a directory or a file
+        if (fs.statSync(sourcePath).isDirectory()) {
+            // Recursively copy the directory
+            copyDirectory(sourcePath, destPath);
+        } else {
+            // Copy the file
+            fs.copyFileSync(sourcePath, destPath);
+        }
+    });
+}
+copyDirectory("./src/sdk", "./lib/sdk")
 
 
 // GZIP
