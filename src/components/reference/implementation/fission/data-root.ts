@@ -48,11 +48,11 @@ export async function lookupOnFisson(
   username: string
 ): Promise<CID | null> {
   try {
-    console.log(" lookupOnFisson1 ", username)
-    const resp = await fetch(
-      Fission.apiUrl(endpoints, `user/data/${username}`),
-      { cache: "reload" } // don't use cache
-    )
+    console.log(" lookupOnFisson2 ", username)
+    // const resp = await fetch(
+    //   Fission.apiUrl(endpoints, `user/data/${username}`),
+    //   { cache: "reload" } // don't use cache
+    // )
     const cid = await getAccountInfo();
     // const cid = await resp.json()
     return decodeCID(cid)
