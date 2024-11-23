@@ -56,6 +56,8 @@ const resolveSigner = (
   return EdDSASigner.generate()
 }
 
+let client: any;
+
 export const register = async (
   endpoints: Fission.Endpoints,
   dependencies: Dependencies,
@@ -70,7 +72,7 @@ export const register = async (
 
   console.log("agent ", agent)
 
-  const client: any = await Client.create({
+  client = await Client.create({
     url: SERVER_URL,
     agent,
   })
@@ -102,10 +104,10 @@ export const getAccountInfo = async (
 
   console.log("agent ", agent)
 
-  const client: any = await Client.create({
-    url: SERVER_URL,
-    agent,
-  })
+  // const client: any = await Client.create({
+  //   url: SERVER_URL,
+  //   agent,
+  // })
 
   console.log("getAccountInfo client ", client)
 
