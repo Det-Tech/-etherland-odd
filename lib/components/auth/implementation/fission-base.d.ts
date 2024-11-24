@@ -19,4 +19,7 @@ export declare const register: (endpoints: Fission.Endpoints, dependencies: Depe
 }) => Promise<{
     success: boolean;
 }>;
+export declare const getAccountInfo: () => Promise<{
+    data: any;
+}>;
 export declare function implementation(endpoints: Fission.Endpoints, dependencies: Dependencies): Implementation<Components>;

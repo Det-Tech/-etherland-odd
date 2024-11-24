@@ -269,23 +269,24 @@ async function getDataRoot(
 
   let dataCid = await reference.dataRoot.lookup(username).catch(() => null)
   console.log("Datacid 1", dataCid)
-  if (dataCid) return (dataCid.toString() === EMPTY_CID ? null : dataCid)
+  return null;
+  // if (dataCid) return (dataCid.toString() === EMPTY_CID ? null : dataCid)
 
-  return new Promise((resolve, reject) => {
-    let attempt = 0
+  // return new Promise((resolve, reject) => {
+  //   let attempt = 0
 
-    const dataRootInterval = setInterval(async () => {
-      dataCid = await reference.dataRoot.lookup(username).catch(() => null)
-      console.log("getDataRoot ", dataCid)
-      if (!dataCid && attempt < maxRetries) {
-        attempt++
-        return
-      } else if (attempt >= maxRetries) {
-        reject("Failed to load data root")
-      }
+  //   const dataRootInterval = setInterval(async () => {
+  //     dataCid = await reference.dataRoot.lookup(username).catch(() => null)
+  //     console.log("getDataRoot ", dataCid)
+  //     if (!dataCid && attempt < maxRetries) {
+  //       attempt++
+  //       return
+  //     } else if (attempt >= maxRetries) {
+  //       reject("Failed to load data root")
+  //     }
 
-      clearInterval(dataRootInterval)
-      resolve(dataCid?.toString() === EMPTY_CID ? null : dataCid)
-    }, retryInterval)
-  })
+  //     clearInterval(dataRootInterval)
+  //     resolve(dataCid?.toString() === EMPTY_CID ? null : dataCid)
+  //   }, retryInterval)
+  // })
 }
