@@ -121,7 +121,11 @@ export async function createAndConnect(
   repoName: string,
   logging: boolean
 ): Promise<{ ipfs: IPFSCore; repo: IPFSRepo }> {
+  console.log("createAndConnect1 ", dependencies.storage)
+  console.log("createAndConnect2 ", peersUrl)
   const peers = await listPeers(dependencies.storage, peersUrl)
+
+  console.log("createAndConnect3 ", peers)
 
   if (peers.length === 0) {
     throw new Error("💥 Couldn't start IPFS node, peer list is empty")
@@ -180,6 +184,7 @@ export async function listPeers(
   const maybePeers = await storage.getItem(storageKey)
 
   if (t.isString(maybePeers) && maybePeers.trim() !== "") {
+    console.log("node 1")
     peers = JSON.parse(maybePeers)
 
     fetchPeers(peersUrl).then(list =>
@@ -190,6 +195,8 @@ export async function listPeers(
     })
 
   } else {
+
+    console.log("node 2")
     peers = await fetchPeers(peersUrl)
     await storage.setItem(storageKey, JSON.stringify(peers))
 
