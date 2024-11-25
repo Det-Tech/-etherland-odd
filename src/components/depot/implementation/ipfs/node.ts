@@ -184,13 +184,17 @@ export async function listPeers(
   const maybePeers = await storage.getItem(storageKey)
 
   if (t.isString(maybePeers) && maybePeers.trim() !== "") {
-    console.log("node 1")
+    console.log("node 1", )
     peers = JSON.parse(maybePeers)
+    console.log("maybePeers ", maybePeers)
     console.log("peers ", peers)
     console.log("peersUrl ", peersUrl)
 
-    fetchPeers(peersUrl).then(list =>
+    fetchPeers(peersUrl).then(list =>{
+      console.log("bro", list)
+      console.log("bro", JSON.stringify(list))
       storage.setItem(storageKey, JSON.stringify(list))
+    }
     ).catch(err => {
       // don't throw
       console.error(err)
