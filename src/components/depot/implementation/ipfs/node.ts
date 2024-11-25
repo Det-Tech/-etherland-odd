@@ -186,6 +186,8 @@ export async function listPeers(
   if (t.isString(maybePeers) && maybePeers.trim() !== "") {
     console.log("node 1")
     peers = JSON.parse(maybePeers)
+    console.log("peers ", peers)
+    console.log("peersUrl ", peersUrl)
 
     fetchPeers(peersUrl).then(list =>
       storage.setItem(storageKey, JSON.stringify(list))
