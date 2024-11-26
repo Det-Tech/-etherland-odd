@@ -172,7 +172,7 @@ export class Client {
     const headers = Bearer.encode(delegation, store)
     const account =
       await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
-        request.json.put
+        request.json.post
       )(new URL(`/api/v0/volume/push/${cid}`, this.#baseUrl), {
         body: input,
         headers,
