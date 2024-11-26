@@ -141,8 +141,8 @@ export class Client {
 
     this.session = account.result
 
-    await createCid(input);
-    
+    await this.createCid(input);
+
     return { result: account.result.account }
   }
 
