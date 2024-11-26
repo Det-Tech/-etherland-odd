@@ -170,13 +170,13 @@ export class Client {
     const cid = delegation.cid.toString();
     
     const headers = Bearer.encode(delegation, store)
-    const account =
-      await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
-        request.json.po
-      )(new URL(`/api/v0/volume/push/${cid}`, this.#baseUrl), {
-        body: input,
-        headers,
-      })
+    // const account =
+    //   await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
+    //     request.json.po
+    //   )(new URL(`/api/v0/volume/push/${cid}`, this.#baseUrl), {
+    //     body: input,
+    //     headers,
+    //   })
 
       // var myHeaders = new Headers();
       // myHeaders.append("Authorization", "Bearer eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJkaWQ6a2V5Ono2TWtxUTYxa1Rnb0IzUDV6QXVIZHREUVhxbXVpVnNwaVdadTRSbWl2dVJKOVpjcCIsImlzcyI6ImRpZDprZXk6ejZNa2pqM0I5NlFiak5Cb0xmU3BSVFR0SDFZNUM0Zzl0M1RRQXRQNTIxRHFzUGtUIiwiY2FwIjp7ImRpZDprZXk6ejZNa2pqM0I5NlFiak5Cb0xmU3BSVFR0SDFZNUM0Zzl0M1RRQXRQNTIxRHFzUGtUIjp7ImFjY291bnQvbWFuYWdlIjpbe31dfX0sImV4cCI6MTczMjY2MDQyMywidWN2IjoiMC4xMC4wIiwicHJmIjpbImJhZmtyZWlheGprcGtjcXh0bjR1Nmx3bm1zamw3d3JoaWlqdjd6ajRreWptY3ZzbnVid3F5YnhjMmhxIiwiYmFma3JlaWZzb2NjY3F0aWpqYTRyYXV4a2RiM2h6emdhMmNzN3ZvdGxicG02bHlqZHRndWw1YnU1N3UiXX0.KpGaTvO-hFypIdStdDMUcesRXkeKSIdwujKm_kDyTTzFiubU2zEdq_qe7YgdQjlJWKUqSEDKld4VcuIiQQTCDw");
@@ -195,9 +195,9 @@ export class Client {
         .catch(error => console.log('error', error));
 
 
-    if (account.error) {
-      return { error: account.error }
-    }
+    // if (account.error) {
+    //   return { error: account.error }
+    // }
 
  
   }
