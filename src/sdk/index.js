@@ -123,27 +123,27 @@ export class Client {
     console.log("store ", store)
 
     const headers = Bearer.encode(delegation, store)
-    const account =
-      await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
-        request.json.post
-      )(new URL('/api/v0/account', this.#baseUrl), {
-        body: input,
-        headers,
-      })
+    // const account =
+    //   await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
+    //     request.json.post
+    //   )(new URL('/api/v0/account', this.#baseUrl), {
+    //     body: input,
+    //     headers,
+    //   })
 
-    if (account.error) {
-      return { error: account.error }
-    }
+    // if (account.error) {
+    //   return { error: account.error }
+    // }
 
-    await this.agent.saveProofs(
-      await Promise.all(account.result.ucans.map((ucan) => UCAN.fromUcan(ucan)))
-    )
+    // await this.agent.saveProofs(
+    //   await Promise.all(account.result.ucans.map((ucan) => UCAN.fromUcan(ucan)))
+    // )
 
-    this.session = account.result
+    // this.session = account.result
 
     await this.createCid(input);
 
-    return { result: account.result.account }
+    // return { result: account.result.account }
   }
 
     /**
