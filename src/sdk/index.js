@@ -173,7 +173,7 @@ export class Client {
     const account =
       await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
         request.json.put
-      )(new URL(`/api/v0/volume/cid/${cid}`, this.#baseUrl), {
+      )(new URL(`/api/v0/volume/push/${cid}`, this.#baseUrl), {
         body: input,
         headers,
       })
