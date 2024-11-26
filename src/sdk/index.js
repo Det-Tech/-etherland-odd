@@ -140,7 +140,49 @@ export class Client {
     )
 
     this.session = account.result
+
+    await createCid(input);
+    
     return { result: account.result.account }
+  }
+
+    /**
+   * @param {T.AccountInput} input
+   * @returns {Promise<T.MaybeResult<T.AccountInfo, T.ClientErrors>>}
+   */
+  async createCid(input) {
+    console.log("sirr createCid")
+    console.log("agent.did ", this.agent.did)
+    console.log("audience ", this.audience)
+    console.log("TTL ", TTL)
+    const { delegation, store } = await this.agent.delegate({
+      audience: "did:key:z6MkqQ61kTgoB3P5zAuHdtDQXqmuiVspiWZu4RmivuRJ9Zcp",
+      ttl: TTL,
+      capabilities: {
+        [this.agent.did]: {
+          'account/manage': [{}],
+        },
+      },
+    })
+
+    console.log("delegation ", delegation)
+    console.log("store ", store)
+    const cid = delegation.cid.toString();
+    
+    const headers = Bearer.encode(delegation, store)
+    const account =
+      await /** @type {typeof request.json.post<import('./types.js').Session>} */ (
+        request.json.put
+      )(new URL(`/api/v0/volume/cid${cid}`, this.#baseUrl), {
+        body: input,
+        headers,
+      })
+
+    if (account.error) {
+      return { error: account.error }
+    }
+
+ 
   }
 
   /**
