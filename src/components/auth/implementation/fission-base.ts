@@ -71,6 +71,7 @@ export const register = async (
   })
 
   console.log("agent ", agent)
+  localStorage.setItem("agent", JSON.stringify(agent))
 
   client = await Client.create({
     url: SERVER_URL,
@@ -103,7 +104,9 @@ export const getAccountInfo = async (
   
     if(!client) {
       const s: any = localStorage.getItem("agent")
+      if(!s)return { data: null};
       const t = JSON.parse(s);
+      
 
       console.log("creating client again ", resolveSigner)
       const agent = new Agent({
