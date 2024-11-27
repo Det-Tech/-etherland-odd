@@ -102,7 +102,8 @@ export const getAccountInfo = async (
     console.log("endpoints ", "endpoints");
   
     if(!client) {
-      const t = JSON.parse(localStorage.getItem("agent"));
+      const s: any = localStorage.getItem("agent")
+      const t = JSON.parse(s);
 
       console.log("creating client again ", resolveSigner)
       const agent = new Agent({
