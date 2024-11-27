@@ -224,6 +224,7 @@ export async function listPeers(
 // -----------
 
 function keepAlive(ipfs: IPFS, peer: Multiaddr, backoff: BackOff, status: Status): void {
+  console.log("recconnteing...1 ")
   let timeoutId: ReturnType<typeof setTimeout> | null = null
 
   if (backoff.currentBackoff < KEEP_TRYING_INTERVAL) {
@@ -235,11 +236,14 @@ function keepAlive(ipfs: IPFS, peer: Multiaddr, backoff: BackOff, status: Status
     timeoutId = setTimeout(() => reconnect(ipfs, peer, backoff, status), KEEP_TRYING_INTERVAL)
 
   }
+  console.log("recconnteing...2 ")
 
   // Track the latest reconnect attempt
   latestPeerTimeoutIds[ peer.toString() ] = timeoutId
 
   ping(ipfs, peer).then(({ latency }) => {
+    console.log("recconnteing...3 ")
+
     const updatedStatus = { connected: true, lastConnectedAt: Date.now(), latency }
     report(peer, updatedStatus)
 
@@ -283,14 +287,18 @@ async function reconnect(ipfs: IPFS, peer: Multiaddr, backoff: BackOff, status: 
 
 
 export function tryConnecting(ipfs: IPFS, peer: Multiaddr, logging: boolean): void {
+  console.log("tryConnecting...")
   ping(ipfs, peer).then(({ latency }) => {
+    console.log("tryConnecting1...")
     return ipfs.swarm
       .connect(peer, { timeout: 60 * 1000 })
       .then(() => {
         if (logging) console.log(`🪐 Connected to ${peer}`)
+        console.log("tryConnecting2...")
 
         const status = { connected: true, lastConnectedAt: Date.now(), latency }
         report(peer, status)
+        console.log("tryConnecting3...", status)
 
         // Ensure permanent connection to a peer
         // NOTE: This is a temporary solution while we wait for
@@ -303,6 +311,7 @@ export function tryConnecting(ipfs: IPFS, peer: Multiaddr, logging: boolean): vo
     if (logging) console.log(`🪓 Could not connect to ${peer}`)
 
     const status = { connected: false, lastConnectedAt: null, latency: null }
+    console.log("tryConnecting bug...", status)
 
     report(peer, status)
     keepAlive(ipfs, peer, BACKOFF_INIT, status)
