@@ -131,14 +131,21 @@ export async function createAndConnect(
     throw new Error("💥 Couldn't start IPFS node, peer list is empty")
   }
 
+  console.log("createAndConnect4 ", repoName)
   // Start an IPFS node & connect to all the peers
   const repo = IpfsRepo.create(repoName)
+  console.log("createAndConnect5 ")
+
   const ipfs: IPFSCore = await pkg.create({ ...OPTIONS, repo })
+  console.log("createAndConnect6 ", ipfs)
 
   peers.forEach(peer => {
+    console.log("createAndConnect7 ", peers)
     latestPeerTimeoutIds[ peer.toString() ] = null
     tryConnecting(ipfs as unknown as IPFS, peer, logging)
   })
+
+  console.log("createAndConnect8 ")
 
   // Try connecting when browser comes online
   globalThis.addEventListener("online", async () => {
