@@ -108,6 +108,8 @@ export const getAccountInfo = async (
       })
     
       console.log("agent ", agent)
+      console.log("agent ", localStorage.setItem("agent", JSON.stringify(agent)))
+      console.log("agent ", localStorage.getItem("agent"))
   
       client = await Client.create({
          url: SERVER_URL,
