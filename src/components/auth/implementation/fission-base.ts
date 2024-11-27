@@ -102,7 +102,7 @@ export const getAccountInfo = async (
     console.log("endpoints ", "endpoints");
   
     if(!client) {
-      console.log("creating client again ")
+      console.log("creating client again ", resolveSigner)
       const agent = await Agent.create({
         resolveSigner,
       })
