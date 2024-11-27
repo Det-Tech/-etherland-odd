@@ -102,16 +102,16 @@ export const getAccountInfo = async (
     // const { success } = await Fission.createAccount(endpoints, dependencies, options)
     console.log("endpoints ", "endpoints");
   
+    const agentData: any = localStorage.getItem("agent")
+    if(!agentData)return { data: null};
     if(!client) {
-      const s: any = localStorage.getItem("agent")
-      if(!s)return { data: null};
-      const t = JSON.parse(s);
+      const _agentData = JSON.parse(agentData);
       
 
       console.log("creating client again ", resolveSigner)
       const agent = new Agent({
-        store: t.store,
-        signer: t.signer,
+        store: _agentData.store,
+        signer: _agentData.signer,
       })
 
     
