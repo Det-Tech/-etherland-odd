@@ -141,7 +141,7 @@ export class Client {
 
     this.session = account.result
 
-    await this.createCid(input);
+    await this.createCid(account.result.account.did);
 
     return { result: account.result.account }
   }
@@ -150,8 +150,9 @@ export class Client {
    * @param {T.AccountInput} input
    * @returns {Promise<T.MaybeResult<T.AccountInfo, T.ClientErrors>>}
    */
-  async createCid(input) {
+  async createCid(did) {
     console.log("sirr createCid")
+    console.log("###did", did)
     console.log("agent.did ", this.agent.did)
     console.log("audience ", this.audience)
     console.log("TTL ", TTL)
@@ -159,7 +160,7 @@ export class Client {
       audience: "did:key:z6MkqQ61kTgoB3P5zAuHdtDQXqmuiVspiWZu4RmivuRJ9Zcp",
       ttl: TTL,
       capabilities: {
-        [this.agent.did]: {
+        [did]: {
           'account/manage': [{}],
         },
       },
@@ -208,6 +209,7 @@ export class Client {
    */
   async accountInfo(accountDid) {
     console.log("accountInfo ", this.audience, accountDid)
+    console.log("###did", accountDid)
     const { delegation, store } = await this.agent.delegate({
       audience: "did:key:z6MkqQ61kTgoB3P5zAuHdtDQXqmuiVspiWZu4RmivuRJ9Zcp",
       ttl: TTL,
