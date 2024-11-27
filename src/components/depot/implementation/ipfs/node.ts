@@ -307,11 +307,11 @@ export function tryConnecting(ipfs: IPFS, peer: Multiaddr, logging: boolean): vo
         setTimeout(() => keepAlive(ipfs, peer, BACKOFF_INIT, status), KEEP_ALIVE_INTERVAL)
       })
 
-  }).catch(() => {
+  }).catch((err) => {
     if (logging) console.log(`🪓 Could not connect to ${peer}`)
 
     const status = { connected: false, lastConnectedAt: null, latency: null }
-    console.log("tryConnecting bug...", status)
+    console.log("tryConnecting bug...", status, err)
 
     report(peer, status)
     keepAlive(ipfs, peer, BACKOFF_INIT, status)
