@@ -224,7 +224,7 @@ export async function listPeers(
 // -----------
 
 function keepAlive(ipfs: IPFS, peer: Multiaddr, backoff: BackOff, status: Status): void {
-  console.log("recconnteing...1 ")
+  console.log("reconnecting...1 ")
   let timeoutId: ReturnType<typeof setTimeout> | null = null
 
   if (backoff.currentBackoff < KEEP_TRYING_INTERVAL) {
@@ -236,13 +236,13 @@ function keepAlive(ipfs: IPFS, peer: Multiaddr, backoff: BackOff, status: Status
     timeoutId = setTimeout(() => reconnect(ipfs, peer, backoff, status), KEEP_TRYING_INTERVAL)
 
   }
-  console.log("recconnteing...2 ")
+  console.log("reconnecting...2 ")
 
   // Track the latest reconnect attempt
   latestPeerTimeoutIds[ peer.toString() ] = timeoutId
 
   ping(ipfs, peer).then(({ latency }) => {
-    console.log("recconnteing...3 ")
+    console.log("reconnecting...3 ")
 
     const updatedStatus = { connected: true, lastConnectedAt: Date.now(), latency }
     report(peer, updatedStatus)
