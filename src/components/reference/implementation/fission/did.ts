@@ -12,6 +12,7 @@ export async function root(
 ): Promise<string> {
   try {
     console.log("did !!!! %%", `_did.${username}.${endpoints.userDomain}`)
+    console.log("localstorage 1 ",localStorage.getItem("user"))
     const maybeDid = await DOH.lookupTxtRecord(`_did.${username}.${endpoints.userDomain}`)
     console.log("maybeDid ***", maybeDid)
     if (maybeDid !== null) return maybeDid

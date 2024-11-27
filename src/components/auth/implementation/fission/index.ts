@@ -82,9 +82,9 @@ export async function isUsernameAvailable(
   endpoints: Endpoints,
   username: string
 ): Promise<boolean> {
-  console.log("sdk isUsernameAvailable ")
+  console.log("sdk isUsernameAvailable  ")
   const resp = await fetch(
-    Fission.apiUrl(endpoints, `/user/data/${username}`)
+    Fission.apiUrl(endpoints, `/account`)
   )
 
   return !resp.ok
